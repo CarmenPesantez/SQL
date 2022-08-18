@@ -1,3 +1,3 @@
 # SQL
-My SQL Learning Projects
+My SQL Learning Projects!
 <br>
