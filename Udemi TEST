@@ -1,0 +1,77 @@
+SELECT * FROM cd.facilities;
+2.	SELECT name, membercost FROM cd.facilities;
+3.	SELECT * FROM cd.facilities
+	WHERE membercost !=0;
+
+4.	SELECT facid, name, membercost, monthlymaintenance FROM cd.facilities
+	WHERE membercost >0 AND membercost<(monthlymaintenance*1/50);
+
+5.	SELECT * FROM cd.facilities
+	WHERE name LIKE '%Tennis%';
+
+6.	SELECT * FROM cd.facilities
+	WHERE facid IN (1,5);
+
+7.	SELECT memid, surname, firstname, joindate FROM cd.members
+	WHERE joindate>='2012-09-01';
+
+8.	SELECT DISTINCT surname FROM cd.members
+	ORDER BY surname
+	LIMIT 10;
+
+9.	SELECT MAX(joindate) AS latest_signup FROM cd.members
+
+10.	SELECT COUNT (*) FROM cd.facilities
+	WHERE guestcost>=10;
+
+11.	SELECT facid, SUM(slots) AS total_slots 
+	FROM cd.bookings
+	WHERE starttime BETWEEN '2012-09-01' AND '2012-10-01'
+	GROUP BY facid
+	ORDER BY SUM(slots);
+
+	*** OPTION to eliminate the date range confusion
+
+	SELECT facid, SUM(slots) AS total_slots 
+	FROM cd.bookings
+	WHERE starttime >= '2012-09-01' 
+	AND starttime <= '2012-10-01'
+	GROUP BY facid
+	ORDER BY SUM(slots);
+
+
+12.	SELECT facid, SUM(slots) AS total_slots 
+FROM cd.bookings
+GROUP BY facid
+HAVING SUM(slots)>1000
+ORDER BY SUM(slots);
+
+
+13.	SELECT a.starttime AS start, b.name
+	FROM cd.bookings AS a
+	INNER JOIN cd.facilities AS b
+	ON a.facid=b.facid
+	WHERE starttime BETWEEN '2012-09-21' AND '2012-09-22'
+	AND name LIKE '%Tennis Court%'
+	ORDER BY starttime;
+
+	SELECT a.starttime AS start, b.name FROM cd.bookings AS a
+	INNER JOIN cd.facilities AS b
+	ON a.facid=b.facid
+	WHERE a.facid IN (1,2)
+	AND a.starttime >= '2012-09-21' 
+	AND a.starttime<'2012-09-22'
+	ORDER BY a.starttime
+
+
+14.	SELECT a.starttime AS start, b.firstname, b.surname
+	FROM cd.bookings AS a
+	INNER JOIN cd.members AS b
+	ON a.memid=b.memid
+	WHERE b.firstname='David' AND b.surname='Farrell';
+
+	SELECT starttime AS start, firstname, surname FROM cd.bookings AS a
+	INNER JOIN cd.members as b
+	ON a.memid=b.memid
+	WHERE firstname IN('David')
+	AND surname IN('Farrell')
