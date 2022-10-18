@@ -1,0 +1,146 @@
+freeCodeCamp Course
+09/05/2022
+
+DROP TABLE student;
+
+CREATE TABLE student (
+student_id INT AUTO_INCREMENT,
+name VARCHAR (20),
+major VARCHAR (20) DEFAULT('undecided'),
+PRIMARY KEY (student_id)
+);
+
+
+DESCRIBE student;
+
+DROP TABLE student;
+
+ALTER TABLE student ADD gpa DECIMAL(3,2);
+
+ALTER TABLE student DROP COLUMN gpa;
+
+SELECT * FROM student;
+
+INSERT INTO student (student_id, name) VALUES (4, "Claire");
+
+DELETE FROM student WHERE student_id= 4;
+
+INSERT INTO student (name, major) VALUES ("Jack", 'Biology');
+INSERT INTO student (name, major) VALUES ("Kate", 'Socioloty');
+
+09/07/2022
+
+INSERT INTO student (name, major) VALUES ("Jack", 'Biology');
+INSERT INTO student (name, major) VALUES ("Kate", 'Socioloty');
+INSERT INTO student (name, major) VALUES ("Claire", 'Chemistry');
+INSERT INTO student (name, major) VALUES ('Jack', 'Biology');
+INSERT INTO student (name, major) VALUES ("Mike", 'Computer Science');
+
+UPDATE student
+SET major="Bio"
+WHERE major= "Biology";
+
+UPDATE student
+SET major="Comp Sci"
+WHERE major= "Computer Science";
+
+UPDATE student
+SET major="Comp Sci"
+WHERE student_id= "4";
+
+UPDATE student
+SET major="Biochemistry"
+WHERE major= "Bio" OR major='Chemistry';
+
+*******To change multiple rows in a table*****
+
+UPDATE student
+SET name="Tom", major='undecided'
+WHERE student_id= 1;
+
+*******If we remove the WHERE the changes will affect the whole table
+UPDATE student
+SET major='undecided'
+
+
+********DELETE table, rows or a group of rows*****
+
+DELETE FROM student
+WHERE student_id= 5;
+
+DELETE FROM student
+WHERE name= 'Tom' AND major='undecided';
+
+DELETE FROM student;
+
+*******SELECT********
+
+SELECT name 
+FROM student;
+
+SELECT student.name, student.major 
+FROM student;
+
+SELECT student.name, student.major 
+FROM student
+ORDER BY name;
+
+SELECT student.name, student.major 
+FROM student
+ORDER BY name DESC;
+
+SELECT student.name, student.major 
+FROM student
+ORDER BY student_id ASC;
+
+SELECT student.student_id, student.name, student.major 
+FROM student
+ORDER BY major, student_id DESC;
+
+SELECT * FROM student
+LIMIT 2;
+
+SELECT * FROM student
+ORDER BY student_id DESC
+LIMIT 2;
+
+****WHERE**** -- <, >, <=, >=, =, <>, AND, OR
+
+SELECT * 
+FROM student
+WHERE major='Biology';
+
+SELECT * 
+FROM student
+WHERE major='Chemestry';
+
+SELECT * 
+FROM student
+WHERE major='Chemistry' OR major="Biology"
+
+SELECT *
+FROM student
+WHERE student_id<3;
+
+SELECT *
+FROM student
+WHERE student_id<=3;
+
+SELECT *
+FROM student
+WHERE student_id<=3 AND name<>"Jack";
+
+**** IN ***
+SELECT *
+FROM student
+WHERE name IN ('Claire',"Kate", "mike");
+
+SELECT *
+FROM student
+WHERE major IN ('biology',"Chemistry");
+
+*****We can combine statements****
+
+SELECT *
+FROM student
+WHERE major IN ('biology',"Chemistry") AND student_id >2;
