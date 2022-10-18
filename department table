@@ -1,0 +1,39 @@
+SELECT * FROM depts;
+
+SELECT()
+SUM(CASE WHEN department='A'THEN 1 ELSE 0 END)/
+SUM(CASE WHEN department='B'THEN 1 ELSE 0 END);
+
+SELECT(
+SUM(CASE WHEN department='A'THEN 1 ELSE 0 END)/
+SUM(CASE WHEN department='B'THEN 1 ELSE 0 END)
+	);
+  
+  SELECT(
+SUM(CASE WHEN department='A'THEN 1 ELSE 0 END)/
+SUM(CASE WHEN department='B'THEN 1 ELSE 0 END)
+	)
+	FROM depts;
+  
+  
+SELECT(
+SUM(CASE WHEN department='A'THEN 1 ELSE 0 END)//*Add the A's, we have 2*/
+SUM(CASE WHEN department='B'THEN 1 ELSE 0 END)/*Add the B's, we have 1*/
+	)
+	FROM depts
+	
+	/*The operation states 2/1=2*/SELECT(
+  
+  
+DELETE FROM depts
+WHERE department='B'
+
+/* Since we deleated the department B now the operation will give us an error*/
+DELETE FROM depts
+WHERE depatment='B'
+
+SELECT(
+SUM(CASE WHEN department='A'THEN 1 ELSE 0 END)//*Suman las A que tenemos 2*/
+NULLIF (SUM(CASE WHEN department='B'THEN 1 ELSE 0 END),0) AS department_ratio
+	)
+	FROM depts
