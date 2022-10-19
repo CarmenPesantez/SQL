@@ -9,3 +9,8 @@ SELECT E.name AS Employee FROM Employee AS E
 INNER JOIN Employee AS M
 ON E.managerId=M.id
 WHERE E.salary>M.salary
+
+SELECT email
+FROM Person
+GROUP BY email
+HAVING COUNT(email)>1
