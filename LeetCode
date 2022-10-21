@@ -14,3 +14,42 @@ SELECT email
 FROM Person
 GROUP BY email
 HAVING COUNT(email)>1
+
+/*Write an SQL query to report the names of the customer that are not referred by the customer with id = 2*/
+SELECT name FROM Customer
+WHERE id NOT IN (SELECT id FROM Customer
+                 WHERE referee_id=2)
+                 
+SELECT name FROM Customer
+WHERE referee_id <>2 OR referee_id IS NULL
+(Since NULL values are ignore we can include an expression to include this values IS NULL)
+
+/*Write an SQL query to report all customers who never order anything.*/
+
+SELECT name AS Customers FROM Customers
+WHERE id NOT IN (SELECT customerId FROM Orders)
+
+/*Write an SQL query to calculate the bonus of each employee. The bonus of an employee is 100% of their salary if 
+the ID of the employee is an odd number and the employee name does not start with the character 'M'. The bonus of an employee is 0 otherwise.*/
+
+SELECT employee_id, (if(employee_id%2<>0 AND name NOT LIKE 'M%', salary, 0)) AS bonus
+FROM Employees
+Order by employee_id;
+
+/*Write an SQL query to swap all 'f' and 'm' values (i.e., change all 'f' values to 'm' and vice versa) with a single 
+update statement and no intermediate temporary tables.*/
+
+UPDATE Salary
+SET
+sex=CASE
+sex
+WHEN 'm' THEN 'f'
+WHEN 'f' THEN 'm'
+END;
+
+UPDATE Salary
+SET sex=CASE
+WHEN sex='m' THEN 'f'
+WHEN sex='f' THEN 'm'
+END;
+
