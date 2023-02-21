@@ -87,5 +87,33 @@ GROUP BY JobTitle
 HAVING AVG(Salary)>45000
 ORDER BY AVG(Salary) DESC
 
+SELECT *
+FROM [SQL Tutorial].dbo.EmployeeDemographics
+
+UPDATE [SQL Tutorial].dbo.EmployeeDemographics
+SET Age=31, Gender='Female'
+WHERE FirstName='Holly' AND LastName='Flax'
 
 
+DELETE FROM [SQL Tutorial].dbo.EmployeeDemographics
+WHERE EmployeeID=1005
+
+DELETE FROM [SQL Tutorial].dbo.EmployeeDemographics
+WHERE EmployeeID=1005
+
+SELECT AVG(Age) AS AvgAge
+FROM
+[SQL Tutorial].dbo.EmployeeDemographics
+
+SELECT Demo.EmployeeID, Sal.Salary
+FROM
+[SQL Tutorial].dbo.EmployeeDemographics AS Demo
+JOIN [SQL Tutorial].dbo.EmployeeSalary AS Sal
+	ON Demo.EmployeeID=Sal.EmployeeID 
+	
+SELECT Demo.EmployeeID, Demo.FirstName, Demo.LastName, Sal.JobTitle, Ware.Age
+FROM [SQL Tutorial].dbo.EmployeeDemographics AS Demo
+LEFT JOIN [SQL Tutorial].dbo.EmployeeSalary AS Sal
+	ON Demo.EmployeeID=Sal.EmployeeID
+LEFT JOIN [SQL Tutorial].dbo.WareHouseEmployeeDemographics AS Ware
+	ON Demo.EmployeeID=Ware.EmployeeID 
