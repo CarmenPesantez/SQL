@@ -117,3 +117,34 @@ LEFT JOIN [SQL Tutorial].dbo.EmployeeSalary AS Sal
 	ON Demo.EmployeeID=Sal.EmployeeID
 LEFT JOIN [SQL Tutorial].dbo.WareHouseEmployeeDemographics AS Ware
 	ON Demo.EmployeeID=Ware.EmployeeID 
+	
+	
+	PARTITION BY
+SELECT * 
+FROM [SQL Tutorial]..EmployeeDemographics AS Demo
+JOIN [SQL Tutorial]..EmployeeSalary AS Sal
+	ON Demo.EmployeeID=Sal.EmployeeID
+
+SELECT *
+FROM [SQL Tutorial]..EmployeeDemographics
+WHERE EmployeeID=1005
+
+INSERT INTO [SQL Tutorial]..EmployeeDemographics VALUES
+(1005, 'Toby', 'Flenderson', 32, 'Male')
+
+	Difference Between Group By and Partition
+
+SELECT Gender, COUNT(Gender) 
+FROM [SQL Tutorial]..EmployeeDemographics AS Dem
+JOIN [SQL Tutorial]..EmployeeSalary AS Sal
+	ON Dem.EmployeeID=Sal.EmployeeID
+GROUP BY Gender
+
+SELECT FirstName, LastName, Gender, Salary,
+COUNT(Gender) OVER (PARTITION BY Gender) AS TotalGender
+FROM [SQL Tutorial]..EmployeeDemographics AS Dem
+JOIN [SQL Tutorial]..EmployeeSalary AS Sal
+	ON Dem.EmployeeID=Sal.EmployeeID
+	
+	CTE Tables
+
