@@ -147,4 +147,50 @@ JOIN [SQL Tutorial]..EmployeeSalary AS Sal
 	ON Dem.EmployeeID=Sal.EmployeeID
 	
 	CTE Tables
+WITH CTE_Employee AS
+(SELECT FirstName, LastName, Gender, Salary
+,COUNT(Gender) OVER (PARTITION BY Gender) AS TotalGender
+,AVG(Salary) OVER (PARTITION BY Gender) AS AvgSalary
+FROM [SQL Tutorial]..EmployeeDemographics AS Dem
+JOIN [SQL Tutorial]..EmployeeSalary AS Sal
+	ON Dem.EmployeeID=Sal.EmployeeID
+WHERE Salary>'45000'
+)
+SELECT *
+FROM CTE_Employee
 
+
+	TEMP TABLES
+	
+CREATE TABLE #temp_Employee(
+EmployeeID int,
+JobTitle varchar(100),
+Salary int
+)
+
+SELECT *
+FROM #temp_Employee
+INSERT INTO #temp_Employee VALUES (
+'1001', 'HR', '45000'
+)
+INSERT INTO #temp_Employee
+SELECT *
+FROM [SQL Tutorial]..EmployeeSalary
+
+
+CREATE TABLE #Temp_Employee2(
+JobTitle varchar(50),
+EmployeePerJob int,
+AvgAge int,
+AvgSalary int
+)
+
+INSERT INTO #Temp_Employee2
+SELECT JobTitle, Count(JobTitle), AVG(Age), AVG(Salary)
+FROM [SQL Tutorial]..EmployeeDemographics AS Emp
+JOIN [SQL Tutorial]..EmployeeSalary AS Sal
+	ON Emp.EmployeeID=Sal.EmployeeID
+GROUP BY JobTitle
+
+SELECT *
+FROM #Temp_Employee2
