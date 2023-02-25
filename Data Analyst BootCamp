@@ -194,3 +194,64 @@ GROUP BY JobTitle
 
 SELECT *
 FROM #Temp_Employee2
+
+CREATE PROCEDURE TEST
+AS
+SELECT *
+FROM EmployeeDemographics
+
+EXEC TEST;
+
+CREATE PROCEDURE Temp_Employee
+AS 
+CREATE TABLE #Temp_Employee (
+JobTitle varchar(100),
+EmployeesPerJob int,
+AvgAge int,
+AvgSalary int
+)
+
+INSERT INTO #Temp_Employee
+SELECT JobTitle, Count(JobTitle), AVG(Age), AVG(Salary)
+FROM EmployeeDemographics AS Emp
+	JOIN EmployeeSalary AS Sal
+	ON Emp.EmployeeID=Sal.EmployeeID
+GROUP BY JobTitle
+
+SELECT *
+FROM #Temp_Employee
+
+EXEC Temp_Employee
+
+-- SUBQUERIES
+
+SELECT *
+FROM EmployeeSalary
+
+--Subquery in Select
+SELECT EmployeeID, Salary, (Select AVG(Salary)FROM EmployeeSalary)AS AllAvgSalary 
+FROM EmployeeSalary
+
+--How to do it with Partition By
+SELECT EmployeeID, Salary, AVG(Salary) OVER () AS AllAvgSalary 
+FROM EmployeeSalary
+
+-- Why Group By doesn't work
+SELECT EmployeeID, Salary, AVG(Salary) AS AllAvgSalary 
+FROM EmployeeSalary
+GROUP BY EmployeeID, Salary
+ORDER BY 1,2
+
+--SUBQUERY IN FROM
+SELECT A.EmployeeID, AllAvgSalary
+FROM (SELECT EmployeeID, Salary, AVG(Salary) OVER () AS AllAvgSalary 
+FROM EmployeeSalary) AS A
+
+--SUBQUERY in WHERE
+SELECT EmployeeID, JobTitle, Salary
+FROM EmployeeSalary
+WHERE EmployeeID IN (
+		SELECT EmployeeID
+		FROM EmployeeDemographics
+		WHERE Age>30)
+					
