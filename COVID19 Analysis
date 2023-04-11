@@ -1,0 +1,56 @@
+SELECT * 
+FROM PortfolioProject..CovidDeaths
+WHERE continent IS NOT NULL
+ORDER BY 3,4
+
+--SELECT *
+--FROM PortfolioProject..CovidVaccinations
+--ORDER BY 3,4
+
+-- SELECT DATA TO BE USED
+
+SELECT Location, Date, total_cases, new_cases, total_deaths, population
+FROM PortfolioProject..CovidDeaths
+ORDER BY 1,2
+
+--TOTAL CASES VS TOTAL DEATHS
+---Showing the chances of dieying if you get COVID
+
+SELECT Location, Date, total_cases, total_deaths, (total_deaths/total_cases)*100 AS DeathPercentage
+FROM PortfolioProject..CovidDeaths
+WHERE Location like '%states%'
+ORDER BY 1,2
+
+--TOTAL CASES VS POPULATION
+--Percetage of US population that got COVID
+
+SELECT Location, Date, population, total_cases, (total_cases/population)*100 AS PercentofPopulationInfected
+FROM PortfolioProject..CovidDeaths
+WHERE Location like '%states%'
+ORDER BY 1,2
+
+--COUNTRIES WITH THE HIGHEST INFECTION RATES COMPARE TO POPULATION
+SELECT Location, Population, MAX(total_cases) AS HighestInfectionCount, MAX((total_cases/population))*100 AS PercentofPopulationInfected
+FROM PortfolioProject..CovidDeaths
+--WEHERE Location LIKE '%states%'
+GROUP BY Location, population
+ORDER BY 4 DESC
+
+--COUTRIES WITH HIGHEST DEATH COUNT PER POPULATION
+SELECT location, MAX(CAST(total_deaths AS int)) AS TotalDeathCount
+FROM PortfolioProject..CovidDeaths
+WHERE continent IS NOT NULL
+GROUP BY location
+ORDER BY 2 DESC
+
+SELECT location, MAX(CAST(total_deaths AS int)) AS TotalDeathCount
+FROM PortfolioProject..CovidDeaths
+GROUP BY location
+ORDER BY TotalDeathCount DESC
+
+--BY CONTINENT
+SELECT continent, MAX(CAST(total_deaths AS int)) AS TotalDeathCount
+FROM PortfolioProject..CovidDeaths
+WHERE continent IS NOT NULL
+GROUP BY continent
+ORDER BY TotalDeathCount DESC
