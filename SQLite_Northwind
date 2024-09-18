@@ -1,2 +1,57 @@
 SELECT LastName AS Apellido FROM Employees 
 SELECT FirstName AS Nombre, LastName AS Apellido FROM Employees 
+SELECT Price, Price*2 AS Precio_doble FROM Products
+SELECT SUM(Price) AS Suma_de_Precios FROM Products
+
+SELECT * FROM Products
+ORDER BY Price
+
+SELECT * FROM Products
+ORDER BY Price ASC
+
+SELECT * FROM Products
+ORDER BY Price DESC
+
+SELECT * FROM Products
+ORDER BY ProductName ASC
+
+SELECT * FROM Products
+ORDER BY ProductName ASC NULLS LAST
+
+SELECT * FROM Products
+ORDER BY RANDOM() DESC NULLS LAST
+
+SELECT * FROM Products
+ORDER BY ProductName, SupplierID DESC
+
+SELECT * FROM Products
+ORDER BY ProductName, SupplierID ASC
+
+SELECT * FROM Products
+ORDER BY ProductName, ProductID ASC
+
+SELECT DISTINCT ProductName 
+FROM Products
+ORDER BY ProductName ASC
+
+SELECT ProductName FROM Products
+WHERE ProductID = 14
+
+SELECT * FROM Products
+WHERE ProductID = 12
+
+SELECT * FROM Products
+WHERE ProductID = 14
+
+SELECT * FROM Products
+WHERE ProductID = 14
+
+SELECT * FROM Products
+WHERE Price <= 40;
+
+SELECT * FROM Products
+WHERE Price > 40;
+
+SELECT * FROM Products
+WHERE Price < 40;
+
