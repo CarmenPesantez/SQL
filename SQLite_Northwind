@@ -55,3 +55,29 @@ WHERE Price > 40;
 SELECT * FROM Products
 WHERE Price < 40;
 
+SELECT * FROM Customers
+WHERE CustomerID >=50 AND CustomerID <=55
+
+SELECT * FROM Employees
+WHERE FirstName ='Nancy' OR FirstName ='Anne'
+
+SELECT * FROM Products
+WHERE (Price < 20 OR CategoryID =6) AND SupplierID = 7
+
+SELECT * FROM Products
+WHERE NOT Price >40;
+
+SELECT * FROM Products
+WHERE Price <=40
+
+SELECT * FROM Customers
+WHERE Country <>'USA';
+
+SELECT * FROM Customers
+WHERE NOT Country ='USA';
+
+SELECT * FROM Customers
+WHERE NOT Country ='USA' AND NOT Country = 'France';
+
+SELECT * FROM Customers
+WHERE Country NOT IN ('USA', 'France')
