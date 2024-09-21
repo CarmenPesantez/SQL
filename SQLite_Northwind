@@ -125,3 +125,20 @@ WHERE LastName IN ("Fuller", "King")
 
 SELECT * FROM Employees
 WHERE LastName NOT IN ("Fuller", "King")
+
+SELECT COUNT(FirstName) FROM Employees;
+SELECT SUM(Price) FROM Products;
+SELECT AVG(Price) FROM Products;
+
+SELECT ROUND(AVG(Price)) AS AVERAGE FROM Products;
+SELECT ROUND(AVG(Price), 4) AS AVERAGE FROM Products;
+SELECT ROUND(AVG(Price), 2) AS AVERAGE FROM Products;
+
+SELECT COUNT(FirstName) FROM Employees;
+SELECT SUM(Price) FROM Products;
+SELECT AVG(Price) FROM Products;
+
+SELECT ProductName, MIN(Price) FROM Products
+WHERE ProductName IS NOT NULL;
+
+SELECT ProductName, MAX(Price) FROM Products
