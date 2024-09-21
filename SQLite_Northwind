@@ -81,3 +81,24 @@ WHERE NOT Country ='USA' AND NOT Country = 'France';
 
 SELECT * FROM Customers
 WHERE Country NOT IN ('USA', 'France')
+
+SELECT * FROM Employees
+WHERE LastName LIKE "Fuller"
+
+SELECT * FROM Employees
+WHERE LastName LIKE "F%";
+
+SELECT * FROM Employees
+WHERE LastName LIKE "%r";
+
+SELECT * FROM Employees
+WHERE LastName LIKE "%er%";
+
+SELECT * FROM Employees
+WHERE LastName LIKE "F____r";
+
+SELECT * FROM Employees
+WHERE LastName LIKE "Full___";
+
+SELECT * FROM Employees
+WHERE LastName LIKE "_u__%";
