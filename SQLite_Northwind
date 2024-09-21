@@ -102,3 +102,26 @@ WHERE LastName LIKE "Full___";
 
 SELECT * FROM Employees
 WHERE LastName LIKE "_u__%";
+
+SELECT * FROM Products
+WHERE ProductName IS NULL
+ORDER BY ProductName ASC
+
+SELECT * FROM Products
+WHERE SupplierID = 3
+OR SupplierID = 4
+OR SupplierID = 5
+OR SupplierID = 6;
+
+SELECT * FROM Products
+WHERE SupplierID IN (3,4,5,6)
+
+SELECT * FROM Employees
+WHERE LastName = "Fuller"
+OR LastName = "King";
+
+SELECT * FROM Employees
+WHERE LastName IN ("Fuller", "King")
+
+SELECT * FROM Employees
+WHERE LastName NOT IN ("Fuller", "King")
