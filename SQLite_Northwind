@@ -142,3 +142,18 @@ SELECT ProductName, MIN(Price) FROM Products
 WHERE ProductName IS NOT NULL;
 
 SELECT ProductName, MAX(Price) FROM Products
+
+--
+
+SELECT ProductID, Quantity,
+(SELECT ProductName FROM Products AS P
+WHERE OD.ProductID=P.ProductID) AS Name
+FROM OrderDetails AS OD
+
+SELECT ProductID, Quantity,
+(SELECT ProductName FROM [Products] P
+WHERE OD.ProductID = P.ProductID) AS Name
+FROM [OrderDetails] OD
+
+(SELECT Price FROM Products [P]
+WHERE P.ProductID = OD.ProductID) AS Price
