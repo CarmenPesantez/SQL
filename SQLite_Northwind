@@ -157,3 +157,14 @@ FROM [OrderDetails] OD
 
 (SELECT Price FROM Products [P]
 WHERE P.ProductID = OD.ProductID) AS Price
+
+SELECT ProductID, SUM(Quantity) AS Total_Vendido,
+(SELECT Price FROM Products [P]
+WHERE P.ProductID = OD.ProductID) AS Price,
+(ROUND(SUM(Quantity) * (SELECT Price FROM Products [P]
+WHERE P.ProductID = OD.ProductID),2)) AS Total_Recaudado
+FROM OrderDetails [OD]
+GROUP BY ProductID 
+ORDER BY Total_Recaudado DESC
+
+
