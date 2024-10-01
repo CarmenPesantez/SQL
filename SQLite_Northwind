@@ -209,3 +209,5 @@ SELECT FirstName, LastName,
 WHERE O.EmployeeID = E.EmployeeID
 AND O.OrderID = OD.OrderID) AS Unidades_Totales
 FROM [Employees] E
+
+4:31:42 Tiempo del Video
