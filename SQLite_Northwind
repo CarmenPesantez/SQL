@@ -178,4 +178,12 @@ FROM OrderDetails [OD]
 GROUP BY ProductID 
 ORDER BY Total_Recaudado DESC
 
-
+SELECT ProductID, SUM(Quantity) AS Total_Vendido,
+(SELECT ProductName FROM [Products] P
+WHERE P.ProductID = OD.ProductID) AS Name,
+ROUND((SUM(Quantity)*(SELECT Price FROM [Products] P
+WHERE P.ProductID=OD.ProductID))) AS Total_Recaudado
+FROM [OrderDetails] OD
+WHERE (SELECT Price FROM [Products] P WHERE P.ProductID = OD. ProductID) > 40
+GROUP BY ProductID
+ORDER BY Total_Recaudado
