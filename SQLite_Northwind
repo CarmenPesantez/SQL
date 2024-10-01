@@ -201,5 +201,11 @@ WHERE (SELECT Price FROM [Products] P
 		WHERE P.ProductID = OD.ProductID) > 40
 GROUP BY ProductID
 ORDER BY Total_Recaudado)
-
 WHERE Total_Vendido >100
+
+
+SELECT FirstName, LastName,
+(SELECT SUM(OD.Quantity) FROM [Orders] O, [OrderDetails] OD
+WHERE O.EmployeeID = E.EmployeeID
+AND O.OrderID = OD.OrderID) AS Unidades_Totales
+FROM [Employees] E
