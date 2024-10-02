@@ -210,4 +210,18 @@ WHERE O.EmployeeID = E.EmployeeID
 AND O.OrderID = OD.OrderID) AS Unidades_Totales
 FROM [Employees] E
 
-4:31:42 Tiempo del Video
+SELECT FirstName, LastName,
+(SELECT SUM(OD.Quantity) FROM [Orders] O, [OrderDetails] OD
+WHERE O.EmployeeID = E.EmployeeID 
+AND O.OrderID = OD.OrderID) AS Unidades_Totales
+FROM [Employees] E
+WHERE Unidades_Totales >(SELECT AVG(Unidades_Totales) FROM (
+SELECT (SELECT SUM(OD.Quantity) FROM [Orders] O, [OrderDetails] OD
+WHERE O.EmployeeID = E2.EmployeeID 
+AND OD.OrderID = O.OrderID) AS Unidades_Totales
+FROM [Employees] E2
+GROUP BY E2.EmployeeID))
+
+--JOINS
+
+
