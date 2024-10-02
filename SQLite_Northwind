@@ -224,4 +224,17 @@ GROUP BY E2.EmployeeID))
 
 --JOINS
 
+SELECT * FROM Employees E, Orders O
+WHERE E.EmployeeID = O.EmployeeID;
 
+SELECT * FROM Employees E
+INNER JOIN ORDERS O
+ON E.EmployeeID = O.EmployeeID;
+
+SELECT * FROM Employees E
+JOIN ORDERS O
+ON E.EmployeeID = O.EmployeeID;
+
+SELECT LastName, FirstName, OrderID FROM Employees E
+INNER JOIN ORDERS O
+ON E.EmployeeID = O.EmployeeID;
